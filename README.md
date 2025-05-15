@@ -1,7 +1,7 @@
 # Forest Fire Prediction System
 
 A web application that predicts the Fire Weather Index (FWI) based on weather parameters.
-[Click to view project]([https://www.genome.gov/](https://forest-fire-prediction-system.onrender.com/predict))
+[Click to view project](https://forest-fire-prediction-system.onrender.com)
 
 ## Features
 
