@@ -60,5 +60,9 @@ def predict():
     except Exception as e:
         return render_template('error.html', error=str(e))
 
+# For local development
 if __name__ == '__main__':
     app.run(debug=True)
+
+# For Vercel
+app = app
