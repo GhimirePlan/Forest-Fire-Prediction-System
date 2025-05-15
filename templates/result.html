@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-container">
+    <h2>Prediction Result</h2>
+    
+    <div class="prediction-result">
+        <h3>Fire Weather Index (FWI): <span class="prediction-value">{{ prediction }}</span></h3>
+        
+        <div class="risk-indicator">
+            {% if prediction < 5 %}
+                <div class="risk-level low">Low Fire Risk</div>
+            {% elif prediction < 15 %}
+                <div class="risk-level moderate">Moderate Fire Risk</div>
+            {% elif prediction < 25 %}
+                <div class="risk-level high">High Fire Risk</div>
+            {% else %}
+                <div class="risk-level extreme">Extreme Fire Risk</div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="input-summary">
+        <h4>Input Parameters:</h4>
+        <ul>
+            <li><strong>Temperature:</strong> {{ features[0] }}°C</li>
+            <li><strong>Relative Humidity:</strong> {{ features[1] }}%</li>
+            <li><strong>Wind Speed:</strong> {{ features[2] }} km/h</li>
+            <li><strong>Rain:</strong> {{ features[3] }} mm</li>
+            <li><strong>FFMC:</strong> {{ features[4] }}</li>
+            <li><strong>DMC:</strong> {{ features[5] }}</li>
+            <li><strong>Fire Class:</strong> {{ features[6] }}</li>
+        </ul>
+    </div>
+    
+    <a href="/" class="back-btn">Make Another Prediction</a>
+</div>
+{% endblock %}

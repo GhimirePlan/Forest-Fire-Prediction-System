@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Enter Weather Data for Fire Weather Index Prediction</h2>
+    
+    <form action="/predict" method="POST" class="prediction-form">
+        <div class="form-group">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" step="0.1" name="temperature" id="temperature" required>
+            <small>Typical range: 20-40°C</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="rh">Relative Humidity (%):</label>
+            <input type="number" step="0.1" name="rh" id="rh" required>
+            <small>Typical range: 30-100%</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="ws">Wind Speed (km/h):</label>
+            <input type="number" step="0.1" name="ws" id="ws" required>
+            <small>Typical range: 0-30 km/h</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="rain">Rain (mm):</label>
+            <input type="number" step="0.1" name="rain" id="rain" required>
+            <small>Typical range: 0-30 mm</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="ffmc">FFMC (Fine Fuel Moisture Code):</label>
+            <input type="number" step="0.1" name="ffmc" id="ffmc" required>
+            <small>Typical range: 6-10</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="dmc">DMC (Duff Moisture Code):</label>
+            <input type="number" step="0.1" name="dmc" id="dmc" required>
+            <small>Typical range: 1000-2000</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="classes">Fire Class:</label>
+            <select name="classes" id="classes" required>
+                <option value="">Select...</option>
+                <option value="0">No Fire (0)</option>
+                <option value="1">Fire (1)</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="submit-btn">Predict Fire Weather Index</button>
+    </form>
+</div>
+{% endblock %}
