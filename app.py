@@ -5,25 +5,28 @@ import os
 
 app = Flask(__name__)
 
-# Check if pickle files exist
-if not os.path.exists('model.pkl') or not os.path.exists('scaler.pkl'):
-    print("Error: model.pkl or scaler.pkl not found!")
-    exit(1)
+# Initialize model and scaler as None
+model = None
+scaler = None
 
-try:
-    # Load the trained model and scaler
-    with open('model.pkl', 'rb') as f:
-        model = pickle.load(f)
-    
-    with open('scaler.pkl', 'rb') as f:
-        scaler = pickle.load(f)
-    
-    print("Model and scaler loaded successfully!")
-    
-except Exception as e:
-    print(f"Error loading models: {e}")
-    print("Please recreate the pickle files with recreate_models.py")
-    exit(1)
+def load_models():
+    global model, scaler
+    try:
+        # Load the trained model and scaler
+        with open('model.pkl', 'rb') as f:
+            model = pickle.load(f)
+        
+        with open('scaler.pkl', 'rb') as f:
+            scaler = pickle.load(f)
+        
+        print("Model and scaler loaded successfully!")
+        return True
+    except Exception as e:
+        print(f"Error loading models: {e}")
+        return False
+
+# Try to load models at startup
+models_loaded = load_models()
 
 @app.route('/')
 def home():
@@ -31,6 +34,12 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    global model, scaler
+    
+    # Check if models are loaded
+    if not models_loaded and not load_models():
+        return render_template('error.html', error="Model files not found or could not be loaded.")
+    
     try:
         # Get form data
         features = [
